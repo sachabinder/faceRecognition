@@ -1,3 +1,9 @@
+backups
+*.DS_Store
+database
+front/node_modules
+front/public/bundle.js
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
