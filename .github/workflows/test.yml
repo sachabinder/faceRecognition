@@ -1,4 +1,4 @@
-name: TEST DJANGO
+name: django test
 on:
   [pull_request, push]
 jobs:
