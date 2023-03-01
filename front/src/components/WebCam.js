@@ -1,8 +1,11 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 
+/**
+ * Component coding the webcam framwork
+ * Render the component
+ * @return {Component} A component
+ */
 export default function WebCam() {
-  const WIDTH = 500;
-  const HEIGHT = 500;
   const videoRef = useRef(null);
 
   useEffect(() => {

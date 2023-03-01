@@ -24,6 +24,12 @@ const itemCategory = {
   px: 3,
 };
 
+/**
+ * Component coding the nav bar of the main page
+ * Render the component
+ * @param {props} props should contain the information of the active tab
+ * @return {Component} A component
+ */
 export default function Navigator(props) {
   const {...other} = props;
   const history = useHistory();

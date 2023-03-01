@@ -4,7 +4,12 @@ import Paper from '@mui/material/Paper';
 import {Avatar, Typography} from '@mui/material';
 import Logo from '../assets/logo.png';
 
-export default function MediaCard() {
+/**
+ * Component coding the user card
+ * Render the component
+ * @return {Component} A component
+ */
+export default function UserCard() {
   const paperStyle = {
     padding: 20,
     margin: 'auto',

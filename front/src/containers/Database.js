@@ -3,23 +3,10 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import Navigator from '../components/Navigator';
 import DatabaseContent from '../components/DatabaseContent';
 import Header from '../components/Header';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://fr.mcovision.com/">
-        Mcovision
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
+import Copyright from '../components/Copytight';
 
 let theme = createTheme({
   palette: {
@@ -166,6 +153,11 @@ theme = {
 
 const drawerWidth = 256;
 
+/**
+ * Component coding the the content of the database visualisation
+ * Render the component
+ * @return {Component} A component
+ */
 export default function Database() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));

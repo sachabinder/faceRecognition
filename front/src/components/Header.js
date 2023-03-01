@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Grid from '@mui/material/Grid';
 import HelpIcon from '@mui/icons-material/Help';
@@ -8,6 +7,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
+/**
+ * Component coding the header of the main page
+ * Render the component
+ * @param {props} title the title of the page
+ * @return {Component} A component
+ */
 function Header({title}) {
   return (
     <React.Fragment>

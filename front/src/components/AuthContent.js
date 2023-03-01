@@ -7,6 +7,11 @@ import Button from '@mui/material/Button';
 import WebCam from './WebCam';
 import UserCard from './UserCard';
 
+/**
+ * Component coding the content of the visual authentification
+ * Render the component
+ * @return {Component} A component
+ */
 export default function AuthContent() {
   return (
     <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>

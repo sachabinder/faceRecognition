@@ -6,6 +6,11 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
+/**
+ * Component coding the content of the database visualisation
+ * Render the component
+ * @return {Component} A component
+ */
 export default function DatabaseContent() {
   return (
     <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>
