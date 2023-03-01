@@ -12,7 +12,6 @@ import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import Logo from '../assets/logo.png';
 
-
 const item = {
   py: '2px',
   px: 3,
@@ -26,7 +25,7 @@ const itemCategory = {
 };
 
 export default function Navigator(props) {
-  const { ...other } = props;
+  const {...other} = props;
   const history = useHistory();
 
   const categories = [
@@ -38,10 +37,7 @@ export default function Navigator(props) {
           icon: <PeopleIcon />,
           path: '/',
         },
-        { id: 'Database', 
-          icon: <DnsRoundedIcon />,
-          path: '/database',
-        },
+        {id: 'Database', icon: <DnsRoundedIcon />, path: '/database'},
       ],
     },
   ];
@@ -50,8 +46,11 @@ export default function Navigator(props) {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{ ...item, ...itemCategory, fontSize: 22, color: '#fff' }}>
-        <img src={Logo} style={{ marginRight:"15px", width: "40%"}}/> Mcovision
+        <ListItem
+          sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}
+        >
+          <img src={Logo} style={{marginRight: '15px', width: '40%'}} />{' '}
+          Mcovision
         </ListItem>
         {categories.map(({id, icon, children}) => (
           <Box key={id} sx={{bgcolor: '#101F33'}}>

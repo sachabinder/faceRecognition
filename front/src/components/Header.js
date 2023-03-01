@@ -8,9 +8,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
-
 function Header({title}) {
-
   return (
     <React.Fragment>
       <AppBar
@@ -18,7 +16,7 @@ function Header({title}) {
         color="primary"
         position="static"
         elevation={0}
-        sx={{ zIndex: 0 }}
+        sx={{zIndex: 0}}
       >
         <Toolbar>
           <Grid container alignItems="center" spacing={1}>

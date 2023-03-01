@@ -8,26 +8,25 @@ import Button from '@mui/material/Button';
 
 export default function DatabaseContent() {
   return (
-    <Paper sx={{ maxWidth: 936, margin: 'auto', overflow: 'hidden' }}>
+    <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>
       <AppBar
         position="static"
         color="default"
         elevation={0}
-        sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
+        sx={{borderBottom: '1px solid rgba(0, 0, 0, 0.12)'}}
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs>
-            </Grid>
+            <Grid item xs></Grid>
             <Grid item>
-              <Button variant="contained" sx={{ mr: 1 }}>
+              <Button variant="contained" sx={{mr: 1}}>
                 Add user
               </Button>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
-      <Typography sx={{ my: 5, mx: 2 }} color="text.secondary" align="center">
+      <Typography sx={{my: 5, mx: 2}} color="text.secondary" align="center">
         No users for this project yet
       </Typography>
     </Paper>
