@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
+import UserRowCard from './UserRowCard';
 
 /**
  * Component coding the content of the database visualisation
@@ -34,6 +35,8 @@ export default function DatabaseContent() {
       <Typography sx={{my: 5, mx: 2}} color="text.secondary" align="center">
         No users for this project yet
       </Typography>
+      <UserRowCard />
+      <UserRowCard />
     </Paper>
   );
 }
