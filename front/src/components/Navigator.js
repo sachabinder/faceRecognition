@@ -11,6 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
 import Logo from '../assets/logo.png';
+import {Typography} from '@mui/material';
 
 const item = {
   py: '2px',
@@ -56,7 +57,7 @@ export default function Navigator(props) {
           sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}
         >
           <img src={Logo} style={{marginRight: '15px', width: '40%'}} />{' '}
-          Mcovision
+          <Typography variant="h6">Mcovision</Typography>
         </ListItem>
         {categories.map(({id, icon, children}) => (
           <Box key={id} sx={{bgcolor: '#101F33'}}>
