@@ -3,6 +3,7 @@ backups
 database
 front/node_modules
 front/public/bundle.js
+back/media
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -103,6 +104,7 @@ __pypackages__/
 # Celery stuff
 celerybeat-schedule
 celerybeat.pid
+
 
 # SageMath parsed files
 *.sage.py
