@@ -4,7 +4,6 @@ import os
 import uuid
 
 
-# Create your models here.
 def upload_to(instance, filename):
     img_extension = os.path.splitext(filename)[-1]
 
