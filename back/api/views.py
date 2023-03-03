@@ -4,6 +4,9 @@ from rest_framework import status
 from django.core.files.storage import default_storage
 from django.conf import settings
 from .serializers import ProfileSerializer
+from deepface import DeepFace
+
+import cv2
 
 
 class GetRoutes(APIView):
@@ -25,14 +28,19 @@ class GetRoutes(APIView):
 
 
 class ProfileView(APIView):
-    """
-    Profile model that whould correspond to a user
-    TODO : Connect it with a one to one field if auth is needed
-    """
-
     def post(self, request):
-        """To register Someone"""
+        """To register someone"""
         serializer = ProfileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+
+
+class FaceRecognitionView(APIView):
+    def post(self, request):
+        """
+        Detect similar faces on the image posted over the all profile picture dataset
+        """
+        img = request.FILES["image"]
+        print(img)
+        return Response({"Response": "All good"}, status=status.HTTP_202_ACCEPTED)
