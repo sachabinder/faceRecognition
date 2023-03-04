@@ -1,8 +1,7 @@
-from django.urls import path
-from .views import ProfileView, ProfileViewDetailed, FaceRecognitionView
+from django.urls import re_path
+from .views import ProfileView, FaceRecognitionView
 
 urlpatterns = [
-    path("profile/", ProfileView.as_view(), name="profile_list"),
-    path("profile/<int:pk>/", ProfileViewDetailed.as_view(), name="profile_detailed"),
-    path("find/", FaceRecognitionView.as_view(), name="finde_face"),
+    re_path(r"^profile/$", ProfileView.as_view(), name="profile"),
+    re_path(r"^find/$", FaceRecognitionView.as_view(), name="profile"),
 ]

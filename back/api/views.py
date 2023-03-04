@@ -1,38 +1,13 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.core.files.storage import default_storage
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
-from deepface import DeepFace
 from .serializers import ProfileSerializer
 from .models import Profile
+from deepface import DeepFace
 
-import numpy as np
 import json
-import os
-
-
-def create_database_embeddings(db_path: str) -> None:
-    """
-    call a dummy find function for db_path once to
-    create embeddings in the initialization or update
-    """
-    file_name = f"representations_{settings.FACE_DETECTION_MODEL_NAME}.pkl"
-    file_name = file_name.replace("-", "_").lower()
-    try:
-        os.remove(db_path + "/" + file_name)
-    except FileNotFoundError:
-        pass
-
-    DeepFace.find(
-        img_path=np.zeros([224, 224, 3]),
-        db_path=db_path,
-        model_name=settings.FACE_DETECTION_MODEL_NAME,
-        distance_metric=settings.FACE_DETECTION_DISTANCE_METRIC,
-        detector_backend=settings.FACE_DETECTION_DETECTOR_BACKEND,
-        silent=True,
-        enforce_detection=False,
-    )
 
 
 class GetRoutes(APIView):
@@ -54,110 +29,45 @@ class GetRoutes(APIView):
 
 
 class ProfileView(APIView):
-    def get(self, request):
-        """To get all Profiles"""
-        isinstances = Profile.objects.all()
-        serializer = ProfileSerializer(isinstances, many=True)
-        return Response(serializer.data)
-
     def post(self, request):
-        """To register a new profile"""
-        # create and save the profile
+        """To register someone"""
         serializer = ProfileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
-        # regenerate embeddings
-        create_database_embeddings(
-            db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
-        )
-
         return Response(serializer.data)
-
-
-class ProfileViewDetailed(APIView):
-    def get(self, request, pk):
-        """To get a single profile informations"""
-        isinstance = Profile.objects.get(pk=pk)
-        serializer = ProfileSerializer(isinstance)
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        """To update a profile informations"""
-
-        # update and save the profile
-        isinstance = Profile.objects.get(pk=pk)
-        serializer = ProfileSerializer(isinstance, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        # regenerate embeddings
-        create_database_embeddings(
-            db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
-        )
-
-        return Response(serializer.data)
-
-    def delete(self, request, pk):
-        """To delete a Profile"""
-        try:
-            isinstance = Profile.objects.get(pk=pk)
-        except ObjectDoesNotExist:
-            return Response(
-                {"response": "Profile not found"},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        isinstance.delete()
-        return Response(
-            {"response": "Profile deleted"},
-            status=status.HTTP_202_ACCEPTED,
-        )
 
 
 class FaceRecognitionView(APIView):
     def post(self, request):
         """
         Detect similar faces on the image posted over the all profile picture dataset
+        TODO : put variables to the profile_picture folder
         """
         image = request.FILES["image"]
         try:
             # Get the face detected and convert it to JSON format
-            faces_detected = json.loads(
+            face_detected = json.loads(
                 DeepFace.find(
                     img_path=image.temporary_file_path(),
-                    db_path="/src"
-                    + settings.MEDIA_URL
-                    + settings.PROFILE_PICTURES_FOLDER,
-                    model_name=settings.FACE_DETECTION_MODEL_NAME,
-                    distance_metric=settings.FACE_DETECTION_DISTANCE_METRIC,
-                    detector_backend=settings.FACE_DETECTION_DETECTOR_BACKEND,
-                    silent=True,
+                    db_path="/src" + settings.MEDIA_URL + "profile_picture/",
                 )[0].to_json(orient="records")
-            )
-
+            )[0]
         except ValueError:
             return Response(
                 {"response": "No faces detected on the input image"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-
-        if faces_detected:
-            face_detected = faces_detected[0]
-            # identify the corresponding profile
+        if face_detected:
             profile_picture_name = (
-                settings.PROFILE_PICTURES_FOLDER
-                + face_detected["identity"].split("/")[-1]
+                "profile_picture/" + face_detected["identity"].split("/")[-1]
             )
             profile = Profile.objects.get(profile_picture=profile_picture_name)
-            face_detected["profile"] = ProfileSerializer(
-                profile
-            ).data  # add the profile
-            face_detected.pop("identity")  # remove the initial pk
+            face_detected["user_id"] = profile.id
+
             return Response(
                 face_detected,
                 status=status.HTTP_202_ACCEPTED,
             )
-
         return Response(
             {"response": "No faces match on the database"},
             status=status.HTTP_400_BAD_REQUEST,

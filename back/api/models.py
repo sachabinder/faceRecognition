@@ -1,5 +1,4 @@
 from django.db import models
-from django.conf import settings
 
 import os
 import uuid
@@ -8,9 +7,10 @@ import uuid
 def upload_to(instance, filename):
     """
     upload funtion for profile picture
+    TODO : put variable on profile picture folder
     """
     img_extension = os.path.splitext(filename)[-1]
-    return settings.PROFILE_PICTURES_FOLDER + str(uuid.uuid4()) + img_extension
+    return "profile_picture/" + str(uuid.uuid4()) + img_extension
 
 
 class Profile(models.Model):
