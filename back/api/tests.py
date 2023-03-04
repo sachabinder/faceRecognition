@@ -8,11 +8,13 @@ class ProfileTestCase(TestCase):
     """Test the profile model and endpoints"""
 
     def setUp(self) -> None:
+        """Setup of the test"""
         Profile.objects.create(
             first_name="root", last_name="root", description="This is a test case"
         )
 
     def test_database(self) -> None:
+        """Test of the database"""
         user = Profile.objects.get(first_name="root")
         self.assertIsInstance(user, Profile)
         self.assertEqual(str(user), "root-root")
@@ -22,6 +24,7 @@ class ProfileTestCase(TestCase):
         self.assertEqual(user.profile_picture, "")
 
     def test_api(self) -> None:
+        """Test of the API"""
         c = Client()
         response = c.post(
             "/api/profile/",
