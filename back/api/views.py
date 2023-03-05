@@ -100,6 +100,7 @@ class ProfileViewDetailed(APIView):
 
     def delete(self, request, pk):
         """To delete a Profile"""
+        # delete the profile
         try:
             isinstance = Profile.objects.get(pk=pk)
         except ObjectDoesNotExist:
@@ -108,6 +109,15 @@ class ProfileViewDetailed(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
         isinstance.delete()
+
+        # regenerate embeddings by catching the error where there is no longer any profile picture
+        try:
+            create_database_embeddings(
+                db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
+            )
+        except ValueError:
+            pass
+
         return Response(
             {"response": "Profile deleted"},
             status=status.HTTP_202_ACCEPTED,

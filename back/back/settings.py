@@ -57,7 +57,9 @@ CORE_APPS = [
     "corsheaders",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "django_cleanup.apps.CleanupConfig",
+]
 
 PROJECT_APPS = [
     "api.apps.ApiConfig",
