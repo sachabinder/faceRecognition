@@ -15,6 +15,7 @@ import os
 import environ
 
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 env = environ.Env()
 environ.Env.read_env()
@@ -145,6 +146,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

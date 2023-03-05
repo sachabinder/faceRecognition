@@ -8,7 +8,12 @@ import {Avatar, Typography} from '@mui/material';
  * Render the component
  * @return {Component} A component
  */
-export default function UserCard() {
+export default function UserCard({
+  firsName,
+  lastName,
+  description,
+  profilePicture,
+}) {
   const paperStyle = {
     padding: 20,
     margin: 'auto',
@@ -19,16 +24,18 @@ export default function UserCard() {
     <Grid>
       <Paper elevation={5} style={paperStyle}>
         <Grid align="center">
-          <Avatar src={''} sx={{height: '80px', width: '80px'}} />
-          <h3>Sacha BINDER</h3>
+          <Typography color="text.secondary" m={2}>
+            Derniere personne détectée
+          </Typography>
+          <Avatar
+            src={'http://localhost:8000' + profilePicture}
+            sx={{height: '100px', width: '100px'}}
+          />
+          <h3>
+            {firsName} {lastName}
+          </h3>
         </Grid>
-        <Typography color="text.secondary">
-          Le lorem ipsum est, en imprimerie, une suite de mots sans
-          signification utilisée à titre provisoire pour calibrer une mise en
-          page, le texte définitif venant remplacer le faux-texte dès qu'il est
-          prêt ou que la mise en page est achevée. Généralement, on utilise un
-          texte en faux latin, le Lorem ipsum ou Lipsum.
-        </Typography>
+        <Typography color="text.secondary">{description}</Typography>
       </Paper>
     </Grid>
   );

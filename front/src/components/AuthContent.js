@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import WebCam from './WebCam';
+import Camera from './Camera';
 import UserCard from './UserCard';
+import CamerasList from './CamerasList';
 
 /**
  * Component coding the content of the visual authentification
@@ -13,6 +13,7 @@ import UserCard from './UserCard';
  * @return {Component} A component
  */
 export default function AuthContent() {
+  const [detectedProfile, setDetectedProfile] = useState(null);
   return (
     <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>
       <AppBar
@@ -23,21 +24,26 @@ export default function AuthContent() {
       >
         <Toolbar>
           <Grid container spacing={2} alignItems="center">
-            <Grid item xs></Grid>
-            <Grid item>
-              <Button variant="contained" sx={{mr: 1}}>
-                Add user
-              </Button>
+            <Grid item xs>
+              <CamerasList />
             </Grid>
+            <Grid item></Grid>
           </Grid>
         </Toolbar>
       </AppBar>
       <Grid container alignItems="center">
         <Grid item m={2}>
-          <WebCam />
+          <Camera setDetectedProfile={setDetectedProfile} />
         </Grid>
         <Grid item alignContent="center" m={2}>
-          <UserCard />
+          {detectedProfile && (
+            <UserCard
+              firsName={detectedProfile.first_name}
+              lastName={detectedProfile.last_name}
+              description={detectedProfile.description}
+              profilePicture={detectedProfile.profile_picture}
+            />
+          )}
         </Grid>
       </Grid>
     </Paper>
