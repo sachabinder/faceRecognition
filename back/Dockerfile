@@ -78,6 +78,9 @@ COPY ./entrypoint.dev.sh /usr/local/bin/
 RUN sed -i 's/\r$//g' /usr/local/bin/entrypoint.dev.sh \
     && chmod +x /usr/local/bin/entrypoint.dev.sh
 
+# for openCv
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.dev.sh"]
 
 
@@ -108,5 +111,8 @@ COPY ./entrypoint.prod.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.prod.sh
 RUN sed -i 's/\r$//g' /usr/local/bin/entrypoint.prod.sh \
     && chmod +x /usr/local/bin/entrypoint.prod.sh
+
+# for openCv
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.prod.sh"]

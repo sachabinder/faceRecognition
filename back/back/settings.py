@@ -53,9 +53,13 @@ CORE_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.postgres",
+    "rest_framework",
+    "corsheaders",
 ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "django_cleanup.apps.CleanupConfig",
+]
 
 PROJECT_APPS = [
     "api.apps.ApiConfig",
@@ -72,6 +76,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "back.urls"
@@ -150,3 +155,20 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# URL used to access the media
+MEDIA_URL = "/media/"
+PROFILE_PICTURES_FOLDER = "profile_picture/"
+
+# Temp files
+FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHandler",)
+
+
+# DeepFace Config
+FACE_DETECTION_MODEL_NAME = "VGG-Face"
+FACE_DETECTION_DISTANCE_METRIC = "cosine"
+FACE_DETECTION_DETECTOR_BACKEND = "opencv"
