@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -55,7 +55,21 @@ function BootstrapDialogTitle(props) {
  * @return {Component} A component
  */
 export default function DatabaseContent() {
-  const [openEditor, setOpenEditor] = React.useState(false);
+  const [openEditor, setOpenEditor] = useState(false);
+
+  const [listProfile, setListProfle] = useState([]);
+
+  const fetchProfile = async () => {
+    const response = await fetch('http://localhost:8000/api/profile/', {
+      method: 'GET',
+    });
+    if (response.status === 200) {
+      const content = await response.json();
+      setListProfle(content);
+    } else {
+      alert('Didn\'t work');
+    }
+  };
 
   const handleClickOpenEditor = () => {
     setOpenEditor(true);
@@ -64,6 +78,15 @@ export default function DatabaseContent() {
   const handleCloseEditor = () => {
     setOpenEditor(false);
   };
+
+  React.useLayoutEffect(() => {
+    fetchProfile();
+  }, []);
+
+  React.useLayoutEffect(() => {
+    const interval = setInterval(fetchProfile, 10000);
+    return () => clearInterval(interval);
+  }, [listProfile]);
 
   return (
     <div>
@@ -89,11 +112,27 @@ export default function DatabaseContent() {
             </Grid>
           </Toolbar>
         </AppBar>
-        <Typography sx={{my: 5, mx: 2}} color="text.secondary" align="center">
-          Il n'y a pas d'utilisateur dans la base de donnée
-        </Typography>
-        <UserRowCard />
-        <UserRowCard />
+        {listProfile ? (
+          listProfile.map((profile) => (
+            <UserRowCard
+              key={profile.id}
+              firsName={profile.first_name}
+              lastName={profile.last_name}
+              description={profile.description}
+              profilePicture={profile.profile_picture}
+            />
+          ))
+        ) : (
+          <Typography
+            sx={{my: 5, mx: 2}}
+            color="text.secondary"
+            align="center"
+          >
+            Il n'y a pas d'utilisateur dans la base de donnée
+          </Typography>
+        )}
+
+        {}
       </Paper>
       <BootstrapDialog
         onClose={handleCloseEditor}
