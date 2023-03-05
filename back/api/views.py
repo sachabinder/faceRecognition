@@ -40,6 +40,11 @@ class GetRoutes(APIView):
         routes = [
             {
                 "Endpoint": "api/profile/",
+                "method": "GET",
+                "description": "To get all profiles info",
+            },
+            {
+                "Endpoint": "api/profile/",
                 "method": "POST",
                 "description": "To create a profile",
                 "Format of the request:": {
@@ -49,8 +54,29 @@ class GetRoutes(APIView):
                     "profile_picture": "<Your picture path)> (optional)",
                 },
             },
+            {
+                "Endpoint": "api/profile/<profile_id>/",
+                "method": "GET",
+                "description": "To get a profile info",
+            },
+            {
+                "Endpoint": "api/profile/<profile_id>/",
+                "method": "PUT",
+                "description": "To update a profile",
+                "Format of the request:": {
+                    "first_name": "<Your name>",
+                    "last_name": "<Your last name>",
+                    "description": "<Your description>",
+                    "profile_picture": "<Your picture path)> (optional)",
+                },
+            },
+            {
+                "Endpoint": "api/profile/<profile_id>/",
+                "method": "DELETE",
+                "description": "To delete a profile",
+            },
         ]
-        return Response(routes, status=status.HTTP_202_ACCEPTED)
+        return Response(routes, status=status.HTTP_200_OK)
 
 
 class ProfileView(APIView):
@@ -120,7 +146,7 @@ class ProfileViewDetailed(APIView):
 
         return Response(
             {"response": "Profile deleted"},
-            status=status.HTTP_202_ACCEPTED,
+            status=status.HTTP_200_OK,
         )
 
 
@@ -165,7 +191,7 @@ class FaceRecognitionView(APIView):
             face_detected.pop("identity")  # remove the initial pk
             return Response(
                 face_detected,
-                status=status.HTTP_202_ACCEPTED,
+                status=status.HTTP_200_OK,
             )
 
         return Response(
