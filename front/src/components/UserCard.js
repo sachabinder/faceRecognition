@@ -17,7 +17,7 @@ export default function UserCard() {
 
   return (
     <Grid>
-      <Paper elevation={15} style={paperStyle}>
+      <Paper elevation={5} style={paperStyle}>
         <Grid align="center">
           <Avatar src={''} sx={{height: '80px', width: '80px'}} />
           <h3>Sacha BINDER</h3>

@@ -33,10 +33,10 @@ export default function AuthContent() {
         </Toolbar>
       </AppBar>
       <Grid container alignItems="center">
-        <Grid item>
+        <Grid item m={2}>
           <WebCam />
         </Grid>
-        <Grid item alignContent="center" m={4}>
+        <Grid item alignContent="center" m={2}>
           <UserCard />
         </Grid>
       </Grid>
