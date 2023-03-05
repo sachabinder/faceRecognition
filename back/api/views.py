@@ -79,6 +79,11 @@ class GetRoutes(APIView):
                 "method": "DELETE",
                 "description": "To delete a profile",
             },
+            {
+                "Endpoint": "api/find/",
+                "method": "POST",
+                "description": "Applies facial identification to find the good profile in the database",
+            },
         ]
         return Response(routes, status=status.HTTP_200_OK)
 
