@@ -24,15 +24,19 @@ def create_database_embeddings(db_path: str) -> None:
     except FileNotFoundError:
         pass
 
-    DeepFace.find(
-        img_path=np.zeros([224, 224, 3]),
-        db_path=db_path,
-        model_name=settings.FACE_DETECTION_MODEL_NAME,
-        distance_metric=settings.FACE_DETECTION_DISTANCE_METRIC,
-        detector_backend=settings.FACE_DETECTION_DETECTOR_BACKEND,
-        silent=True,
-        enforce_detection=False,
-    )
+    # Raise the exception where there is no img in db folder
+    try:
+        DeepFace.find(
+            img_path=np.zeros([224, 224, 3]),
+            db_path=db_path,
+            model_name=settings.FACE_DETECTION_MODEL_NAME,
+            distance_metric=settings.FACE_DETECTION_DISTANCE_METRIC,
+            detector_backend=settings.FACE_DETECTION_DETECTOR_BACKEND,
+            silent=True,
+            enforce_detection=False,
+        )
+    except ValueError:
+        pass
 
 
 class GetRoutes(APIView):
@@ -137,12 +141,9 @@ class ProfileViewDetailed(APIView):
         isinstance.delete()
 
         # regenerate embeddings by catching the error where there is no longer any profile picture
-        try:
-            create_database_embeddings(
-                db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
-            )
-        except ValueError:
-            pass
+        create_database_embeddings(
+            db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
+        )
 
         return Response(
             {"response": "Profile deleted"},
