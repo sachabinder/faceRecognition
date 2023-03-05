@@ -98,7 +98,7 @@ class ProfileView(APIView):
             db_path="/src" + settings.MEDIA_URL + settings.PROFILE_PICTURES_FOLDER
         )
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ProfileViewDetailed(APIView):
