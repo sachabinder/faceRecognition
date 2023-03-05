@@ -160,3 +160,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # URL used to access the media
 MEDIA_URL = "/media/"
+
+# Temp files
+FILE_UPLOAD_HANDLERS = ("django.core.files.uploadhandler.TemporaryFileUploadHandler",)
