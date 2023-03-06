@@ -4,9 +4,12 @@ from rest_framework import status
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from deepface import DeepFace
+from base64 import b64decode
+from PIL import Image
 from .serializers import ProfileSerializer
 from .models import Profile
 
+import io
 import numpy as np
 import json
 import os
@@ -141,7 +144,7 @@ class ProfileViewDetailed(APIView):
         except ObjectDoesNotExist:
             return Response(
                 {"response": "Profile not found"},
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_204_NO_CONTENT,
             )
         isinstance.delete()
 
@@ -161,12 +164,15 @@ class FaceRecognitionView(APIView):
         """
         Detect similar faces on the image posted over the all profile picture dataset
         """
-        image = request.FILES["image"]
+        data = request.data["image"].split(",", 1)[1]
+        base64_decoded = b64decode(data)
+        image = Image.open(io.BytesIO(base64_decoded))
+        image_np = np.array(image)
         try:
             # Get the face detected and convert it to JSON format
             faces_detected = json.loads(
                 DeepFace.find(
-                    img_path=image.temporary_file_path(),
+                    img_path=image_np,
                     db_path="/src"
                     + settings.MEDIA_URL
                     + settings.PROFILE_PICTURES_FOLDER,
@@ -180,7 +186,7 @@ class FaceRecognitionView(APIView):
         except ValueError:
             return Response(
                 {"response": "No faces detected on the input image"},
-                status=status.HTTP_400_BAD_REQUEST,
+                status=status.HTTP_204_NO_CONTENT,
             )
 
         if faces_detected:
@@ -202,5 +208,5 @@ class FaceRecognitionView(APIView):
 
         return Response(
             {"response": "No faces match on the database"},
-            status=status.HTTP_400_BAD_REQUEST,
+            status=status.HTTP_204_NO_CONTENT,
         )

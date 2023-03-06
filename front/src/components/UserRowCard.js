@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPenToSquare, faClose} from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
 import Dialog from '@mui/material/Dialog';
+import ProfileForm from './ProfileForm';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
   '& .MuiDialogContent-root': {
@@ -56,7 +57,7 @@ function BootstrapDialogTitle(props) {
  * Render the component
  * @return {Component} A component
  */
-export default function UserRowCard() {
+export default function UserRowCard({profile}) {
   const [openEditor, setOpenEditor] = React.useState(false);
 
   const handleClickOpenEditor = () => {
@@ -72,21 +73,21 @@ export default function UserRowCard() {
       <Paper elevation={4} sx={{margin: 2, padding: 2}}>
         <Grid container spacing={2}>
           <Grid item>
-            <Avatar sx={{height: '60px', width: '60px'}} />
+            <Avatar
+              src={'http://localhost:8000' + profile.profile_picture}
+              sx={{height: '60px', width: '60px'}}
+            />
           </Grid>
           <Grid item sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item>
-                <Typography variant="h6">Sacha BINDER</Typography>
+                <Typography variant="h6">
+                  {profile.first_name} {profile.last_name}
+                </Typography>
               </Grid>
               <Grid item>
                 <Typography color="text.secondary">
-                  Le lorem ipsum est, en imprimerie, une suite de mots sans
-                  signification utilisée à titre provisoire pour calibrer une
-                  mise en page, le texte définitif venant remplacer le
-                  faux-texte dès qu'il est prêt ou que la mise en page est
-                  achevée. Généralement, on utilise un texte en faux latin, le
-                  Lorem ipsum ou Lipsum.
+                  {profile.description}
                 </Typography>
               </Grid>
             </Grid>
@@ -111,7 +112,7 @@ export default function UserRowCard() {
           Éditer un profil
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          TODO : form de profil pré complété
+          <ProfileForm profile={profile} />
         </DialogContent>
       </BootstrapDialog>
     </div>
