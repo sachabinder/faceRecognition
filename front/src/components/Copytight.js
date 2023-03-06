@@ -13,7 +13,7 @@ export default function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://fr.mcovision.com/">
         Mcovision
-      </Link>{' '}
+      </Link>
       {new Date().getFullYear()}.
     </Typography>
   );

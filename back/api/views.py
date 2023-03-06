@@ -5,7 +5,6 @@ from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from deepface import DeepFace
 from base64 import b64decode
-from tempfile import TemporaryFile
 from PIL import Image
 from .serializers import ProfileSerializer
 from .models import Profile
