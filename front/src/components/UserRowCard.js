@@ -56,7 +56,12 @@ function BootstrapDialogTitle(props) {
  * Render the component
  * @return {Component} A component
  */
-export default function UserRowCard() {
+export default function UserRowCard({
+  firsName,
+  lastName,
+  description,
+  profilePicture,
+}) {
   const [openEditor, setOpenEditor] = React.useState(false);
 
   const handleClickOpenEditor = () => {
@@ -72,22 +77,20 @@ export default function UserRowCard() {
       <Paper elevation={4} sx={{margin: 2, padding: 2}}>
         <Grid container spacing={2}>
           <Grid item>
-            <Avatar sx={{height: '60px', width: '60px'}} />
+            <Avatar
+              src={'http://localhost:8000' + profilePicture}
+              sx={{height: '60px', width: '60px'}}
+            />
           </Grid>
           <Grid item sm container>
             <Grid item xs container direction="column" spacing={2}>
               <Grid item>
-                <Typography variant="h6">Sacha BINDER</Typography>
+                <Typography variant="h6">
+                  {firsName} {lastName}
+                </Typography>
               </Grid>
               <Grid item>
-                <Typography color="text.secondary">
-                  Le lorem ipsum est, en imprimerie, une suite de mots sans
-                  signification utilisée à titre provisoire pour calibrer une
-                  mise en page, le texte définitif venant remplacer le
-                  faux-texte dès qu'il est prêt ou que la mise en page est
-                  achevée. Généralement, on utilise un texte en faux latin, le
-                  Lorem ipsum ou Lipsum.
-                </Typography>
+                <Typography color="text.secondary">{description}</Typography>
               </Grid>
             </Grid>
             <Grid item>
