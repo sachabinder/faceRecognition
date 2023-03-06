@@ -1,11 +1,19 @@
 import React from 'react';
-import {Grid, Paper, TextField, Button, Typography} from '@mui/material';
+import {
+  Grid,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
 import {Stack} from '@mui/system';
 
 /**
- * Constructor of the component
- * Setting up the state, and utils functions
+ * Coding the register/update form for the profiles
+ * render a component
  * @param {props} e props
+ * @return {conmponent} the profile form
  */
 class ProfileForm extends React.Component {
   /**
@@ -24,6 +32,7 @@ class ProfileForm extends React.Component {
           this.props.profile.profilePicture :
           null,
       },
+      isLoading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitForm = this.submitForm.bind(this);
@@ -48,10 +57,11 @@ class ProfileForm extends React.Component {
   /**
    * submitForm function
    * called at the submition of the form
-   * check if the form is valid and return the error message if there is one
    * @argument {Event} e : event called onSubmit
    */
   submitForm = async (e) => {
+    const isLoading = true;
+    this.setState({isLoading});
     e.preventDefault();
     const formData = new FormData();
     formData.append('first_name', this.state.fields.firstName);
@@ -73,9 +83,13 @@ class ProfileForm extends React.Component {
             body: formData,
           },
       );
+
       if (response.status === 200) {
         window.location.reload(false);
       } else {
+        const isLoading = false;
+        this.setState({isLoading});
+
         alert('Un probléme est survenu lors de la connexion au serveur');
       }
     } else {
@@ -83,15 +97,26 @@ class ProfileForm extends React.Component {
         method: 'POST',
         body: formData,
       });
+
       if (response.status === 200) {
         window.location.reload(false);
       } else {
+        const isLoading = false;
+        this.setState({isLoading});
+
         alert('Un probléme est survenu lors de la connexion au serveur');
       }
     }
   };
 
+  /**
+   * deleteProfile function
+   * called at the submition of the form for deletion
+   * @argument {Event} e : event called onSubmit
+   */
   deleteProfile = async (e) => {
+    const isLoading = true;
+    this.setState({isLoading});
     e.preventDefault();
     const response = await fetch(
         `http://localhost:8000/api/profile/${this.props.profile.id}/`,
@@ -102,6 +127,8 @@ class ProfileForm extends React.Component {
     if (response.status === 200) {
       window.location.reload(false);
     } else {
+      const isLoading = false;
+      this.setState({isLoading});
       alert('Un probléme est survenu lors de la connexion au serveur');
     }
   };
@@ -116,6 +143,13 @@ class ProfileForm extends React.Component {
       padding: 20,
       margin: '0',
     };
+    if (this.state.isLoading) {
+      return (
+        <Grid align="center" m={10}>
+          <CircularProgress />
+        </Grid>
+      );
+    }
     return (
       <Grid>
         <Paper elevation={0} style={paperStyle}>
