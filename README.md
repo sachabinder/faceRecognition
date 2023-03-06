@@ -4,6 +4,11 @@
 
 This project is a facial recognition app. It detects in real time faces present in a database on a live stream from the webcam. The good point of the [MVC architechture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) implemented is that this facial recognition framework can be implemented in all type of device by using API endpoints.
 
+<p align="center">
+    <img src="demo/screencast_detection.gif" alt="screencast_detection" width="40%"></a>
+    <img src="demo/screenshot_db.png" alt="screenshot_db" width="40%"></a>
+</p>
+
 * Back-end : [django](https://www.djangoproject.com/) + [django REST Framework](https://www.django-rest-framework.org/)
 * Front-end : [ReactJS](https://reactjs.org/)
 * Database : [PostgreSQL](https://www.postgresql.org/)
