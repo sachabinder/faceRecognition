@@ -12,6 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPenToSquare, faClose} from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
 import Dialog from '@mui/material/Dialog';
+import ProfileForm from './ProfileForm';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
   '& .MuiDialogContent-root': {
@@ -56,12 +57,7 @@ function BootstrapDialogTitle(props) {
  * Render the component
  * @return {Component} A component
  */
-export default function UserRowCard({
-  firsName,
-  lastName,
-  description,
-  profilePicture,
-}) {
+export default function UserRowCard({profile}) {
   const [openEditor, setOpenEditor] = React.useState(false);
 
   const handleClickOpenEditor = () => {
@@ -78,7 +74,7 @@ export default function UserRowCard({
         <Grid container spacing={2}>
           <Grid item>
             <Avatar
-              src={'http://localhost:8000' + profilePicture}
+              src={'http://localhost:8000' + profile.profile_picture}
               sx={{height: '60px', width: '60px'}}
             />
           </Grid>
@@ -86,11 +82,13 @@ export default function UserRowCard({
             <Grid item xs container direction="column" spacing={2}>
               <Grid item>
                 <Typography variant="h6">
-                  {firsName} {lastName}
+                  {profile.first_name} {profile.last_name}
                 </Typography>
               </Grid>
               <Grid item>
-                <Typography color="text.secondary">{description}</Typography>
+                <Typography color="text.secondary">
+                  {profile.description}
+                </Typography>
               </Grid>
             </Grid>
             <Grid item>
@@ -114,7 +112,7 @@ export default function UserRowCard({
           Éditer un profil
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          TODO : form de profil pré complété
+          <ProfileForm profile={profile} />
         </DialogContent>
       </BootstrapDialog>
     </div>

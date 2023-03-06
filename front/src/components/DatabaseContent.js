@@ -10,6 +10,7 @@ import {DialogContent, DialogTitle, IconButton, Dialog} from '@mui/material';
 import styled from '@emotion/styled';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faClose} from '@fortawesome/free-solid-svg-icons';
+import ProfileForm from './ProfileForm';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
   '& .MuiDialogContent-root': {
@@ -114,13 +115,7 @@ export default function DatabaseContent() {
         </AppBar>
         {listProfile ? (
           listProfile.map((profile) => (
-            <UserRowCard
-              key={profile.id}
-              firsName={profile.first_name}
-              lastName={profile.last_name}
-              description={profile.description}
-              profilePicture={profile.profile_picture}
-            />
+            <UserRowCard key={profile.id} profile={profile} />
           ))
         ) : (
           <Typography
@@ -144,9 +139,11 @@ export default function DatabaseContent() {
           id="customized-dialog-title"
           onClose={handleCloseEditor}
         >
-          Éditer un profil
+          Ajouter un profil
         </BootstrapDialogTitle>
-        <DialogContent dividers> TODO : Form de profil vide</DialogContent>
+        <DialogContent dividers>
+          <ProfileForm />
+        </DialogContent>
       </BootstrapDialog>
     </div>
   );
