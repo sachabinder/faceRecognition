@@ -118,7 +118,7 @@ export default function DatabaseContent() {
             </Grid>
           </Toolbar>
         </AppBar>
-        {listProfile ? (
+        {listProfile.length ? (
           listProfile.map((profile) => (
             <UserRowCard key={profile.id} profile={profile} />
           ))
