@@ -1,11 +1,16 @@
 import React from 'react';
+
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import {Avatar, Typography} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 
 /**
- * Component coding the user card
- * Render the component
+ * Component coding the user card for the profile visual detection
+ * @param {string} firsName the first name of the user
+ * @param {string} lastName the last name of the user
+ * @param {string} description a small text about the user
+ * @param {string} profilePicture the relative url of the user profile picture
  * @return {Component} A component
  */
 export default function UserCard({

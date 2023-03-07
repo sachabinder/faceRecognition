@@ -1,6 +1,6 @@
 from django.apps import AppConfig
-from deepface import DeepFace
 from django.conf import settings
+from deepface import DeepFace
 
 
 class ApiConfig(AppConfig):

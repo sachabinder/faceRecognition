@@ -1,8 +1,11 @@
-import * as React from 'react';
+import React, {useState} from 'react';
+
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+
 import Navigator from '../components/Navigator';
 import DatabaseContent from '../components/DatabaseContent';
 import Header from '../components/Header';
@@ -159,7 +162,7 @@ const drawerWidth = 256;
  * @return {Component} A component
  */
 export default function Database() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const isSmUp = useMediaQuery(theme.breakpoints.up('sm'));
 
   const handleDrawerToggle = () => {

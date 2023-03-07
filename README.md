@@ -2,7 +2,9 @@
 
 :pushpin: This repository is for the moment only for dev, **please do not put this version in production**.
 
-This project is a facial recognition app. It detects in real time faces present in a database on a live stream from the webcam. The good point of the [MVC architechture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) implemented is that this facial recognition framework can be implemented in all type of device by using API endpoints.
+:white_check_mark: App tested on macOS 13.1 (M1 Pro), Ubuntu 22.04 LTS (Intel Core i7) : [Google Chrome](https://www.google.com/chrome/)
+
+:rocket: This project is a facial recognition app. It detects in real time faces present in a database on a live stream from the webcam. The good point of the [MVC architechture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) implemented is that this facial recognition framework can be implemented in all type of device by using API endpoints.
 
 <p align="center">
     <img src="demo/screencast_detection.gif" alt="screencast_detection" width="40%"></a>
@@ -13,11 +15,11 @@ This project is a facial recognition app. It detects in real time faces present 
 * Front-end : [ReactJS](https://reactjs.org/)
 * Database : [PostgreSQL](https://www.postgresql.org/)
 
-[Face recognition](https://sefiks.com/2018/08/06/deep-face-recognition-with-keras/) framework is adapted from [DeepFace](https://github.com/serengil/deepface/tree/master). It is a hybrid face recognition framework wrapping **state-of-the-art** models: [`VGG-Face`](https://sefiks.com/2018/08/06/deep-face-recognition-with-keras/), [`Google FaceNet`](https://sefiks.com/2018/09/03/face-recognition-with-facenet-in-keras/), [`OpenFace`](https://sefiks.com/2019/07/21/face-recognition-with-openface-in-keras/), [`Facebook DeepFace`](https://sefiks.com/2020/02/17/face-recognition-with-facebook-deepface-in-keras/), [`DeepID`](https://sefiks.com/2020/06/16/face-recognition-with-deepid-in-keras/), [`ArcFace`](https://sefiks.com/2020/12/14/deep-face-recognition-with-arcface-in-keras-and-python/), [`Dlib`](https://sefiks.com/2020/07/11/face-recognition-with-dlib-in-python/) and `SFace`.
+:newspaper: [Face recognition](https://sefiks.com/2018/08/06/deep-face-recognition-with-keras/) framework is adapted from [DeepFace](https://github.com/serengil/deepface/tree/master). It is a hybrid face recognition framework wrapping **state-of-the-art** models: [`VGG-Face`](https://sefiks.com/2018/08/06/deep-face-recognition-with-keras/), [`Google FaceNet`](https://sefiks.com/2018/09/03/face-recognition-with-facenet-in-keras/), [`OpenFace`](https://sefiks.com/2019/07/21/face-recognition-with-openface-in-keras/), [`Facebook DeepFace`](https://sefiks.com/2020/02/17/face-recognition-with-facebook-deepface-in-keras/), [`DeepID`](https://sefiks.com/2020/06/16/face-recognition-with-deepid-in-keras/), [`ArcFace`](https://sefiks.com/2020/12/14/deep-face-recognition-with-arcface-in-keras-and-python/), [`Dlib`](https://sefiks.com/2020/07/11/face-recognition-with-dlib-in-python/) and `SFace`.
 
-The model to be used as well as the distancing method can be directly selected from the file [settings.py](/back/back/settings.py#L174-L176)
+The model to be used as well as the distancing method can be directly selected from the file [.env file](.env#L12-L14)
 
-## Installation of app
+## Installation of app :computer:
 
 ### Download the project
 
@@ -62,10 +64,10 @@ facerecognition-back-1   | Starting development server at http://0.0.0.0:8000/
 facerecognition-back-1   | Quit the server with CONTROL-C.
 ```
 
-You can now access the app (on port 8000 for the back and 8080 for the front which can be change in [env file](.env)) by :
-* [localhost:8000](localhost:8000) for the REST api
-* [localhost:8000/admin](localhost:8000/admin) for the django admin
-* [localhost:8080](localhost:8080) for the web app
+You can now access the app (on port 8000 for the back and 8080 for the front which can be change in [env file](.env#L7-L8) ) by :
+* [localhost:8000](http://localhost:8000/) for the REST api
+* [localhost:8000/admin](http://localhost:8000/admin/) for the django admin
+* [localhost:8080](http://localhost:8080/) for the web app
 
 
 
@@ -162,8 +164,11 @@ npm run lint:fix
 | BACK_PORT | External back port access | 8000 |
 | FRONT_PORT | External front port access | 8080 |
 | DEBUG | Debug mode execution | True |
-| DOMAIN_NAME | Domaine name to use. Requests from other domain will be rejected. | 127.0.0.1 |
+| DOMAIN_NAME | Domaine name to use in production. Requests from other domain will be rejected. | 127.0.0.1 |
 | SECURE_SSL_REDIRECT | Automaticly redirect non HTTPS requests in HTTPS. To be leave at False if an other proxy is already doing this work | False |
+| FACE_DETECTION_MODEL_NAME | Face recognition model name. Model available : `VGG-Face`, `Facenet`, `OpenFace`, `DeepFace`, `DeepID` | `VGG-Face` |
+| FACE_DETECTION_DISTANCE_METRIC | Distance metric to compare embedings. Distance available : `cosine`, `euclidean`, `euclidean_l2` | `cosine` |
+| FACE_DETECTION_DETECTOR_BACKEND | face detector backend. backend available : `opencv`, `retinaface`, `mtcnn`, `ssd`, `dlib`, `mediapipe` | `opencv` |
 
 
 Command to run to generate a secret django key (you should get django installed)

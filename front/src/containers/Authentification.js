@@ -1,8 +1,11 @@
-import * as React from 'react';
+import React from 'react';
+
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
+
 import Navigator from '../components/Navigator';
 import AuthContent from '../components/AuthContent';
 import Header from '../components/Header';
@@ -155,7 +158,6 @@ const drawerWidth = 256;
 
 /**
  * Component coding the authentification container
- * Render the component
  * @return {Component} A component
  */
 export default function Authentication() {

@@ -1,19 +1,22 @@
 import React, {useState} from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+
 import Camera from './Camera';
 import UserCard from './UserCard';
 import CamerasList from './CamerasList';
 
 /**
- * Component coding the content of the visual authentification
+ * Component coding the content of the facial recognition framework
  * Render the component
  * @return {Component} A component
  */
 export default function AuthContent() {
   const [detectedProfile, setDetectedProfile] = useState(null);
+
   return (
     <Paper sx={{maxWidth: 936, margin: 'auto', overflow: 'hidden'}}>
       <AppBar

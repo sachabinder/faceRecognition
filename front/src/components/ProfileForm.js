@@ -1,18 +1,17 @@
 import React from 'react';
-import {
-  Grid,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  CircularProgress,
-} from '@mui/material';
+
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+
 import {Stack} from '@mui/system';
 
 /**
  * Coding the register/update form for the profiles
- * render a component
- * @param {props} e props
+ * @param {props} e
  * @return {conmponent} the profile form
  */
 class ProfileForm extends React.Component {
@@ -56,7 +55,8 @@ class ProfileForm extends React.Component {
 
   /**
    * submitForm function
-   * called at the submition of the form
+   * called at the submition of the form depending
+   * on the case register/update
    * @argument {Event} e : event called onSubmit
    */
   submitForm = async (e) => {
@@ -135,7 +135,7 @@ class ProfileForm extends React.Component {
 
   /**
    * render function
-   * Render the final form
+   * Render the final form component
    * @return {Component}
    */
   render() {
