@@ -2,7 +2,7 @@
 
 :pushpin: This repository is for the moment only for dev, **please do not put this version in production**.
 
-:white_check_mark: App tested on macOS 13.1 (M1 Pro), Ubuntu 22.04 LTS (Intel Core i7)
+:white_check_mark: App tested on macOS 13.1 (M1 Pro), Ubuntu 22.04 LTS (Intel Core i7) : [Google Chrome](https://www.google.com/chrome/)
 
 :rocket: This project is a facial recognition app. It detects in real time faces present in a database on a live stream from the webcam. The good point of the [MVC architechture](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) implemented is that this facial recognition framework can be implemented in all type of device by using API endpoints.
 

@@ -1,17 +1,19 @@
-import React from 'react';
-import {
-  Avatar,
-  DialogContent,
-  DialogTitle,
-  Grid,
-  Paper,
-  Typography,
-} from '@mui/material';
+import React, {useState} from 'react';
+
+import Avatar from '@mui/material/Avatar';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+
+import styled from '@emotion/styled';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPenToSquare, faClose} from '@fortawesome/free-solid-svg-icons';
-import styled from '@emotion/styled';
-import Dialog from '@mui/material/Dialog';
+
 import ProfileForm from './ProfileForm';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
@@ -54,11 +56,11 @@ function BootstrapDialogTitle(props) {
 
 /**
  * Component coding the user card for the displaying of the database
- * Render the component
+ * @param {object} profile the profile informations
  * @return {Component} A component
  */
 export default function UserRowCard({profile}) {
-  const [openEditor, setOpenEditor] = React.useState(false);
+  const [openEditor, setOpenEditor] = useState(false);
 
   const handleClickOpenEditor = () => {
     setOpenEditor(true);

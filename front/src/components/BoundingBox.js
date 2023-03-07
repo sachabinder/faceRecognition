@@ -2,7 +2,10 @@ import React from 'react';
 
 /**
  * Component coding the bounding box
- * Render the component
+ * @param {int} top the x top corner coordinate
+ * @param {int} left the y top corner coordinate
+ * @param {int} width the width of the box
+ * @param {int} height the height of the box
  * @return {Component} A component
  */
 export default function BoundingBox({

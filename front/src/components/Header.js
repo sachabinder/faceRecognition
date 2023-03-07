@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Grid from '@mui/material/Grid';
 import HelpIcon from '@mui/icons-material/Help';
@@ -9,7 +10,6 @@ import Typography from '@mui/material/Typography';
 
 /**
  * Component coding the header of the main page
- * Render the component
  * @param {props} title the title of the page
  * @return {Component} A component
  */

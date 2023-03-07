@@ -1,6 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {CircularProgress} from '@mui/material';
+
+import CircularProgress from '@mui/material/CircularProgress';
+
 import WebCam from 'react-webcam';
+
 import BoundingBox from './BoundingBox';
 
 const videoConstraints = {
@@ -12,11 +15,13 @@ const videoConstraints = {
 
 /**
  * Component coding the webcam framwork
- * Render the component
+ * @param {object} setDetectedProfile the detected profile informations
+ * to get the bounding box coords
  * @return {Component} A component
  */
 export default function Camera({setDetectedProfile}) {
   const webcamRef = useRef(null);
+
   const [isStreaming, setIsStreaming] = useState(false);
   const [boundingBox, setBoundingBox] = useState(null);
 

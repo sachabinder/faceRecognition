@@ -1,9 +1,11 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {FormControl, InputLabel, NativeSelect} from '@mui/material';
+
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import NativeSelect from '@mui/material/NativeSelect';
 
 /**
- * Component coding all the device cameras list
- * Render the component
+ * Component coding all the availale devices
  * @return {Component} A component
  */
 export default function CamerasList() {

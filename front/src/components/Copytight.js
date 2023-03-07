@@ -1,10 +1,10 @@
 import React from 'react';
+
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 
 /**
- * Component coding the copiright
- * Render the component
+ * Component coding the Copyright
  * @return {Component} A component
  */
 export default function Copyright() {

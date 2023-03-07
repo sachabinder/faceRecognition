@@ -1,15 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import UserRowCard from './UserRowCard';
-import {DialogContent, DialogTitle, IconButton, Dialog} from '@mui/material';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
+import IconButton from '@mui/material/IconButton';
+import Dialog from '@mui/material/Dialog';
+
 import styled from '@emotion/styled';
+
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faClose} from '@fortawesome/free-solid-svg-icons';
+
+import UserRowCard from './UserRowCard';
 import ProfileForm from './ProfileForm';
 
 const BootstrapDialog = styled(Dialog)(({theme}) => ({
@@ -52,12 +59,10 @@ function BootstrapDialogTitle(props) {
 
 /**
  * Component coding the content of the database visualisation
- * Render the component
  * @return {Component} A component
  */
 export default function DatabaseContent() {
   const [openEditor, setOpenEditor] = useState(false);
-
   const [listProfile, setListProfle] = useState([]);
 
   const fetchProfile = async () => {
@@ -80,11 +85,11 @@ export default function DatabaseContent() {
     setOpenEditor(false);
   };
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     fetchProfile();
   }, []);
 
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const interval = setInterval(fetchProfile, 10000);
     return () => clearInterval(interval);
   }, [listProfile]);
