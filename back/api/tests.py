@@ -1,11 +1,11 @@
-import numpy as np
-
 from django.test import TestCase, Client
 from api.models import Profile
 
+import numpy as np
+
 
 class ProfileTestCase(TestCase):
-    """Test the profile model and endpoints"""
+    """Test the Profile model and API endpoints"""
 
     def setUp(self) -> None:
         """Setup of the test"""

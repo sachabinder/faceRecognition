@@ -20,6 +20,7 @@ def create_database_embeddings(db_path: str) -> None:
     call a dummy find function for db_path once to
     create embeddings in the initialization or update
     """
+
     file_name = f"representations_{settings.FACE_DETECTION_MODEL_NAME}.pkl"
     file_name = file_name.replace("-", "_").lower()
     try:
@@ -86,6 +87,9 @@ class GetRoutes(APIView):
                 "Endpoint": "api/find/",
                 "method": "POST",
                 "description": "Applies facial identification to find the good profile in the database",
+                "Format of the request:": {
+                    "image": "<Your image encoded in base64>",
+                },
             },
         ]
         return Response(routes, status=status.HTTP_200_OK)
@@ -94,12 +98,14 @@ class GetRoutes(APIView):
 class ProfileView(APIView):
     def get(self, request):
         """To get all Profiles"""
+
         isinstances = Profile.objects.all()
         serializer = ProfileSerializer(isinstances, many=True)
         return Response(serializer.data)
 
     def post(self, request):
         """To register a new profile"""
+
         # create and save the profile
         serializer = ProfileSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -116,6 +122,7 @@ class ProfileView(APIView):
 class ProfileViewDetailed(APIView):
     def get(self, request, pk):
         """To get a single profile informations"""
+
         isinstance = Profile.objects.get(pk=pk)
         serializer = ProfileSerializer(isinstance)
         return Response(serializer.data)
@@ -138,6 +145,7 @@ class ProfileViewDetailed(APIView):
 
     def delete(self, request, pk):
         """To delete a Profile"""
+
         # delete the profile
         try:
             isinstance = Profile.objects.get(pk=pk)
@@ -164,6 +172,7 @@ class FaceRecognitionView(APIView):
         """
         Detect similar faces on the image posted over the all profile picture dataset
         """
+
         data = request.data["image"].split(",", 1)[1]
         base64_decoded = b64decode(data)
         image = Image.open(io.BytesIO(base64_decoded))

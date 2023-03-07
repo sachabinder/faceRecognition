@@ -1,6 +1,9 @@
 
 #!/bin/sh
 
+mkdir ./media
+mkdir ./media/profile_picture
+
 python3 manage.py check --deploy
 
 echo "Waiting for webinstaller to finish..."

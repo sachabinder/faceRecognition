@@ -5,7 +5,7 @@ import os
 import uuid
 
 
-def upload_to(instance, filename):
+def upload_to(instance, filename: str) -> str:
     """
     upload funtion for profile picture
     """
